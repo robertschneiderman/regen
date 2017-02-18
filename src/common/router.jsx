@@ -9,20 +9,12 @@ import store from './store';
 
 import { PageNotFound } from '../components';
 import homeRoute from '../features/home/route';
-import historyRoute from '../pages/history/route';
-import historyRoute from '../pages/history/route';
-import historyRoute from '../pages/history/route';
-import historyRoute from '../pages/history/route';
 
 const routes = [{
   path: '/',
   component: App,
   childRoutes: [
     homeRoute,
-    historyRoute,
-    historyRoute,
-    historyRoute,
-    historyRoute,
     { path: '*', name: 'Page not found', component: PageNotFound },
   ],
 }];
