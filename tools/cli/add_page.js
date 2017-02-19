@@ -84,6 +84,16 @@ i = helpers.lastLineIndex(lines, /^\}\);$/);
 lines.splice(i, 0, `  ${context.CAMEL_PAGE_NAME}: ${context.CAMEL_PAGE_NAME}Reducer,`);
 toSave(targetPath, lines);
 
+/* ===== Add middleware to store.js ===== */
+console.log('Add to apply middleware.');
+targetPath = path.join(helpers.getProjectRoot(), 'src/common/store.js');
+lines = helpers.getLines(targetPath);
+i = helpers.lastLineIndex(lines, /^import /);
+lines.splice(i + 1, 0, `import ${context.CAMEL_PAGE_NAME}Middleware from '../pages/${context.KEBAB_PAGE_NAME}/redux/middleware';`);
+i = helpers.lastLineIndex(lines, /^\)\(createStore\);$/);
+lines.splice(i, 0, `  ,${context.CAMEL_PAGE_NAME}Middleware`);
+toSave(targetPath, lines);
+
 /* ===== Add route to routeConfig.js ===== */
 console.log('Register route');
 targetPath = path.join(helpers.getProjectRoot(), 'src/common/routeConfig.js');

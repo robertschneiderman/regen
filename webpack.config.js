@@ -2,7 +2,7 @@ var path = require("path");
 
 module.exports = {
   context: __dirname,
-  entry: "./frontend/entry.js",
+  entry: "./src/common/Entry.jsx",
   devServer: {
       historyApiFallback: true
   },  

@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
-// import store from './store'; 
+import store from './store'; 
+import Root from './Root';
 // import * as userActions from './user/actions';
 // import { AUTH_USER } from './auth/types';
 
@@ -17,4 +17,4 @@ import ReactDOM from 'react-dom';
 // }
 // window.store = store;
 
-ReactDOM.render(<Root />, document.querySelector('#root'));
+ReactDOM.render(<Root store={store} />, document.querySelector('#root'));
