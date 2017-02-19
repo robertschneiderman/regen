@@ -5,7 +5,6 @@ target
 node
 src/_tmp
 static
-tools
 
 dist
 coverage

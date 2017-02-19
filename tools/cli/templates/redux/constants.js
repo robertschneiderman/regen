@@ -1,0 +1,10 @@
+export const REQUEST_#{TEMPLATE}S = 'REQUEST_#{TEMPLATE}S';
+export const REQUEST_#{TEMPLATE} = 'REQUEST_#{TEMPLATE}';
+export const CREATE_#{TEMPLATE} = 'CREATE_#{TEMPLATE}';
+export const UPDATE_#{TEMPLATE} = 'UPDATE_#{TEMPLATE}';
+export const DESTROY_#{TEMPLATE} = 'DESTROY_#{TEMPLATE}';
+export const RECEIVE_#{TEMPLATE}S = 'RECEIVE_#{TEMPLATE}S';
+export const RECEIVE_#{TEMPLATE} = 'RECEIVE_#{TEMPLATE}';
+export const REMOVE_#{TEMPLATE} = 'REMOVE_#{TEMPLATE}S';
+export const #{TEMPLATE}_ERROR = '#{TEMPLATE}_ERROR';
+
