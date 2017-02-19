@@ -5,7 +5,7 @@ import { RECEIVE_#{TEMPLATE}S,
          RECEIVE_#{TEMPLATE},
          REMOVE_#{TEMPLATE},
          #{TEMPLATE}_ERROR
-       } from './constants';
+       } from './actions';
 
 const #{template}Reducer = (state = {}, action) => {
   switch(action.type){
