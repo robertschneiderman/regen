@@ -13,12 +13,50 @@ import historyRoute from '../pages/history/route';
 import historyRoute from '../pages/history/route';
 import historyRoute from '../pages/history/route';
 import historyRoute from '../pages/history/route';
+import historyRoute from '../pages/history/route';
+import historyRoute from '../pages/history/route';
+import historyRoute from '../pages/history/route';
+import historyRoute from '../pages/history/route';
+import historyRoute from '../pages/history/route';
+import historyRoute from '../pages/history/route';
+import historyRoute from '../pages/history/route';
+import historyRoute from '../pages/history/route';
+import historyRoute from '../pages/history/route';
+import historyRoute from '../pages/history/route';
+import historyRoute from '../pages/history/route';
+import historyRoute from '../pages/history/route';
+import historyRoute from '../pages/history/route';
+import historyRoute from '../pages/history/route';
+import historyRoute from '../pages/history/route';
+import historyRoute from '../pages/history/route';
+import historyRoute from '../pages/history/route';
+import historyRoute from '../pages/history/route';
+import historyRoute from '../pages/history/route';
 
 const routes = [{
   path: '/',
   component: App,
   childRoutes: [
     homeRoute,
+    historyRoute,
+    historyRoute,
+    historyRoute,
+    historyRoute,
+    historyRoute,
+    historyRoute,
+    historyRoute,
+    historyRoute,
+    historyRoute,
+    historyRoute,
+    historyRoute,
+    historyRoute,
+    historyRoute,
+    historyRoute,
+    historyRoute,
+    historyRoute,
+    historyRoute,
+    historyRoute,
+    historyRoute,
     historyRoute,
     historyRoute,
     historyRoute,
