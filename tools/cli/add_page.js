@@ -1,8 +1,4 @@
 'use strict';
-// Summary:
-//  Add a page: create foler structure and generate corresponding files.
-// Example:
-//  node add_page.js employee
 
 const path = require('path');
 const _ = require('lodash');
@@ -31,6 +27,7 @@ const myContext = {
   Template: _.upperFirst(_.camelCase(pageName)),
   TEMPLATE: pageName.toUpperCase(),
   template: pageName.toLowerCase(),
+  templateKebab: _.kebabCase(pageName)
 };
 
 const filesToSave = [];
@@ -43,7 +40,6 @@ if (shell.test('-e', targetDir)) {
 }
 
 // templated files
-//   'redux/constants.js',
 [
   'components/index.js',
   'redux/actions.js',
@@ -58,17 +54,6 @@ if (shell.test('-e', targetDir)) {
   const res = helpers.handleTemplate(fileName, myContext);
   toSave(filePath, res);
 });
-
-// // redux files
-// [
-//   'actions.js',
-//   'constants.js',
-//   'reducer.js',
-// ].forEach(fileName => {
-//   console.log('creating file: ', fileName);
-//   const filePath = path.join(targetDir, fileName);
-//   toSave(filePath, '');
-// });
 
 let lines;
 let i;
@@ -98,23 +83,13 @@ toSave(targetPath, lines);
 console.log('Register route');
 targetPath = path.join(helpers.getProjectRoot(), 'src/common/routeConfig.js');
 lines = helpers.getLines(targetPath);
-i = helpers.lastLineIndex(lines, /^import /);
-lines.splice(i + 1, 0, `import ${context.CAMEL_PAGE_NAME}Route from '../pages/${context.KEBAB_PAGE_NAME}/route';`);
-i = helpers.lineIndex(lines, 'path: \'*\'');
-// istanbul ignore if
-if (i === -1) {
-  i = helpers.lastLineIndex(lines, /^ {2}\]/);
-}
-lines.splice(i, 0, `    ${context.CAMEL_PAGE_NAME}Route,`);
-toSave(targetPath, lines);
 
-/* ===== Add entry to styles/index.less ===== */
-// console.log('Add entry to styles/index.less');
-// targetPath = path.join(helpers.getProjectRoot(), 'src/styles/index.less');
-// lines = helpers.getLines(targetPath);
-// i = helpers.lastLineIndex(lines, /^@import/);
-// lines.splice(i + 1, 0, `@import '../pages/${context.KEBAB_PAGE_NAME}/style.less';`);
-// toSave(targetPath, lines);
+i = helpers.lastLineIndex(lines, /^import /);
+lines.splice(i + 1, 0, `import ${myContext.Template} from '../pages/auth/components/${myContext.Template}';`);
+i = helpers.lineIndex(lines, 'path: \'*\'');
+lines.splice(i, 0, `    { path: '${myContext.templateKebab}', name: '${myContext.Template}', component: ${myContext.Template}},`);
+
+toSave(targetPath, lines);
 
 shell.mkdir(targetDir);
 shell.mkdir(path.join(targetDir, 'redux'));

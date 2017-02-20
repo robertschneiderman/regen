@@ -7,7 +7,7 @@ import { RECEIVE_#{TEMPLATE}S,
          #{TEMPLATE}_ERROR
        } from './actions';
 
-const #{template}Reducer = (state = {}, action) => {
+const #{template}Reducer = (state = initialState, action) => {
   switch(action.type){
     case RECEIVE_#{TEMPLATE}S:
       let newState = {};

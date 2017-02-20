@@ -12,6 +12,7 @@
     "add:component": "node ./tools/cli/add_component.js",
     "add:feature": "node ./tools/cli/add_feature.js",
     "add:page": "node ./tools/cli/add_page.js",
+    "add:auth": "node ./tools/cli/add_auth.js",
     "build": "node ./tools/build.js",
     "build:test": "node ./tools/build_test_server.js",
     "rm:action": "node ./tools/cli/rm_action.js",
