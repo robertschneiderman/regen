@@ -8,7 +8,6 @@ export const RECEIVE_#{TEMPLATE} = 'RECEIVE_#{TEMPLATE}';
 export const REMOVE_#{TEMPLATE} = 'REMOVE_#{TEMPLATE}S';
 export const #{TEMPLATE}_ERROR = '#{TEMPLATE}_ERROR';
 
-
 export const request#{Template}s = () => ({
     type: REQUEST_#{TEMPLATE}S,
 });

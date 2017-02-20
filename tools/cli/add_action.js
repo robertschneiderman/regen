@@ -40,9 +40,15 @@ targetPath = path.join(targetDir, 'actions.js');
 
 lines = helpers.getLines(targetPath);
 let i = helpers.getFirstEmptyLine(lines);
+console.log('i: ', i);
 lines.splice(i, 0, `export const ${context.CAPS} = '${context.CAPS}';`);
+if (i === 0 ) {
+    lines.splice(i+1, 0, ``);
+    lines.splice(i+2, 0, ``);
+} else {
+    i = helpers.lastLineIndex(lines, /\}\);/);
+}
 
-i = helpers.lastLineIndex(lines, /\}\);/);
 lines.splice(i+2, 0, `export const ${context.CAMEL_ACTION_NAME} = payload => ({`);
 lines.splice(i+3, 0, `  type: ${context.CAPS},`);
 lines.splice(i+4, 0, `  payload`);
