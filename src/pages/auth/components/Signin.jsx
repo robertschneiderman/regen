@@ -1,51 +1,59 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
-import * as actions from '../actions';
+import * as actions from '../redux/actions';
 import { connect } from 'react-redux';
+
+import { validateSignin, renderField } from './helpers';
 
 class Signin extends Component {
 
   handleFormSubmit({ email, password }) {
     this.props.signinUser({ email, password});
-  }
-
-  renderAlert() {
-    if (this.props.errorMessage) {
-      return (
-        <div className="alert alert-danger">
-          <strong>Oops!</strong> {this.props.errorMessage}
-        </div>
-      );
-    }
-  }
+  }  
 
   render() {
-    const { handleSubmit, fields: { email, password }} = this.props;
+    const { handleSubmit } = this.props;
     return (
-      <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
-        <fieldset className="form-group">
-          <label>Email:</label>
-          <Field name="email" component="input" className="input auth-input" />
-        </fieldset>
-        <fieldset className="form-group">
-          <label>Password:</label>
-          <Field name="password" type="password" component="input" className="input auth-input" />
-        </fieldset>
-        {this.renderAlert()}
-        <button className="btn btn-primary" action="submit">Sign in</button>    
+      <form className="form-a" onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
+        
+        <h2 className="hl-b">Sign In</h2>
+
+        <div className="fieldset-a">
+          <Field 
+            name="email"
+            type="text"
+            label="Email"
+            component={renderField} />
+        </div>
+
+        <div className="fieldset-a">
+          <Field 
+            name="password" 
+            label="Password" 
+            type="password" 
+            component={renderField} />
+        </div>
+        
+        <button className="btn-b" type="submit">Sign in</button>    
       </form>
     );
   }
+
 }
 
 function mapStateToProps(state) {
   return { errorMessage: state.auth.error };
 }
 
+function mapDispatchToProps(dispatch) {
+  return {
+    signinUser: payload => dispatch(actions.signinUser(payload))
+  };
+}
+
 let signInForm = reduxForm({
   form: 'signin',
-  fields: ['email', 'password']
+  validate: validateSignin  
 })(Signin);
 
-export default signInForm = connect(mapStateToProps, actions)(signInForm);
-
+export default signInForm = connect(mapStateToProps, mapDispatchToProps)(signInForm);

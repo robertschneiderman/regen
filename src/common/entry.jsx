@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import store from './store'; 
 import Root from './Root';
+import reAuthUser from '../pages/auth/redux/reAuthUser';
 // import * as userActions from './user/actions';
 // import { AUTH_USER } from './auth/types';
 

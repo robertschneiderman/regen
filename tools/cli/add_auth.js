@@ -20,6 +20,7 @@ const toSave = helpers.getToSave(filesToSave);
   'auth/components/RequireAuth.jsx',
   'auth/redux/actions.js',
   'auth/redux/reducer.js',
+  'auth/redux/reAuthUser.js'
 ].forEach(fileName => {
   console.log('processing file: ', fileName);
   const filePath = `${targetDir}/${fileName}`;
@@ -37,27 +38,22 @@ i = helpers.lastLineIndex(lines, /^\}\);$/);
 lines.splice(i, 0, `  auth: authReducer,`);
 toSave(targetPath, lines);
 
-/* ===== Add middleware to store.js ===== */
-console.log('Add to apply middleware.');
-targetPath = path.join(helpers.getProjectRoot(), 'src/common/store.js');
-lines = helpers.getLines(targetPath);
-i = helpers.lastLineIndex(lines, /^import /);
-lines.splice(i + 1, 0, `import authMiddleware from '../pages/auth/redux/middleware';`);
-i = helpers.lastLineIndex(lines, /^\)\(createStore\);$/);
-lines.splice(i, 0, `  ,authMiddleware`);
-toSave(targetPath, lines);
-
 /* ===== Add route to routeConfig.js ===== */
 console.log('Register route');
 targetPath = path.join(helpers.getProjectRoot(), 'src/common/routeConfig.js');
 lines = helpers.getLines(targetPath);
-['Signup', 'Signin', 'Sigout'].forEach(Component => {
+['Signup', 'Signin', 'Signout'].forEach(Component => {
     i = helpers.lastLineIndex(lines, /^import /);
     lines.splice(i + 1, 0, `import ${Component} from '../pages/auth/components/${Component}';`);
     i = helpers.lineIndex(lines, 'path: \'*\'');
     lines.splice(i, 0, `    { path: '${_.kebabCase(Component)}', name: '${Component}', component: ${Component}},`);
 });
 
+/* ===== Add reAuthUser to Entry.js ===== */
+targetPath = path.join(helpers.getProjectRoot(), 'src/common/Entry.jsx');
+lines = helpers.getLines(targetPath);
+i = helpers.lastLineIndex(lines, /^import /);
+lines.splice(i + 1, 0, `import reAuthUser from '../pages/auth/redux/reAuthUser';`);
 toSave(targetPath, lines);
 
 
