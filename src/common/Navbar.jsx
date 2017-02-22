@@ -6,19 +6,27 @@ class Navbar extends Component {
 
   renderLinks() {
     if (this.props.authenticated) {
-      return (<li className="navbar-item">
-        <Link className="nav-link" to="/dashboard">Dashboard</Link>        
-        <Link className="nav-link" to="/calendar">Calendar</Link>        
-        <Link className="nav-link" to="/new-task">New Task</Link>        
-        <Link className="nav-link" to="/signout">Sign Out</Link>
-      </li>);
+      return [
+        <li className="item-navbar">
+          <Link className="link-navbar" to="/dashboard">Dashboard</Link>
+        </li>,
+        <li className="item-navbar">        
+          <Link className="link-navbar" to="/calendar">Calendar</Link>
+        </li>,
+        <li className="item-navbar">              
+          <Link className="link-navbar" to="/new-task">New Task</Link>
+        </li>,
+        <li className="item-navbar">        
+          <Link className="link-navbar" to="/signout">Sign Out</Link>
+        </li>
+      ];
     } else {
       return [
-        <li className="navbar-item" key={1}>
-          <Link className="nav-link" to="/signin">Sign In</Link>
+        <li className="item-navbar" key={1}>
+          <Link className="link-navbar" to="/signin">Sign In</Link>
         </li>,
-        <li className="navbar-item" key={2}>
-          <Link className="nav-link" to="/signup">Sign Up</Link>
+        <li className="item-navbar" key={2}>
+          <Link className="link-navbar" to="/signup">Sign Up</Link>
         </li>
       ];
     }
@@ -26,9 +34,9 @@ class Navbar extends Component {
 
   render() {
     return (
-      <nav className="navbar">
-        <Link to="/" className="navbar-logo">Tracky :)</Link>
-        <ul className="navbar-nav">
+      <nav className="c-navbar">
+        <Link to="/" className="text-logo">Tracky :)</Link>
+        <ul className="list-navbar">
           {this.renderLinks()}
         </ul>
       </nav>
@@ -38,6 +46,7 @@ class Navbar extends Component {
 
 function mapStateToProps(state) {
   return {
+    authenticated: state.auth.authenticated
   };
 }
 

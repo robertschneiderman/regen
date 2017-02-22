@@ -47,7 +47,7 @@ if (inputPath) {
             if (ext !== 'jsx') continue;
             let lines = helpers.getLines(`${targetDir}/${file}`);
             lines.forEach(line => {
-                let regex = /className=\"([^"]*)\"/g;
+                let regex = /className=\"([^"]*)\"|className=\`([^`]*)`/g;
                 let result = regex[Symbol.match](line);
                 if (result) {
                     result.forEach(className => {
@@ -72,12 +72,14 @@ if (inputPath) {
 
                 let regex = new RegExp("^." + className);
                 let alreadyContainsClass = lines.some(line => regex.test(line));
-                if (cssFileName === 'containers') console.log('className: ', className);
+                // if (cssFileName === 'containers') console.log('className: ', className);
                 // console.log('regex: ', regex);
                 // console.log('lines: ', lines);
                 // console.log('className: ', className);
-                // console.log('alreadyContainsClass: ', alreadyContainsClass);
+                // // if (className === 'btn-choose-color') console.log('alreadyContainsClass: ', alreadyContainsClass);
+                // // if (className === 'btn-choose-color') console.log('cssFileName: ', cssFileName);
                 if (!alreadyContainsClass) {
+                    console.log('className: ', className);
                     let i;
                     if (lines.length === 1 && lines[0] === '') { // file empty
                         i = 0;
