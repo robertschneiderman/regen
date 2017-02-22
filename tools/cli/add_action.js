@@ -6,8 +6,8 @@ const helpers = require('./helpers');
 
 const args = process.argv;
 const arr = (args[2] || '').split('/');
-const pageName = _.kebabCase(arr[0]);
-const actionName = _.kebabCase(arr[1]);
+const pageName = _.camelCase(arr[0]);
+const actionName = _.camelCase(arr[1]);
 const actionType = args[3] || 'reducer';
 const camelActionName = _.camelCase(actionName);
 
@@ -39,21 +39,26 @@ console.log('Updating actions.js');
 targetPath = path.join(targetDir, 'actions.js');
 
 lines = helpers.getLines(targetPath);
-let i = helpers.getFirstEmptyLine(lines);
+console.log('lines: ', lines);
+let i = lines.indexOf('');
 console.log('i: ', i);
-lines.splice(i, 0, `export const ${context.CAPS} = '${context.CAPS}';`);
-if (i === 0 ) {
-    lines.splice(i+1, 0, ``);
-    lines.splice(i+2, 0, ``);
+if (i === 0) {
+    lines.splice(i, 0, `export const ${context.CAPS} = '${context.CAPS}';`);
+    lines.splice(i+2, 0, `export const ${context.CAMEL_ACTION_NAME} = payload => ({`);
+    lines.splice(i+3, 0, `  type: ${context.CAPS},`);
+    lines.splice(i+4, 0, `  payload`);
+    lines.splice(i+5, 0, `});`);
+    lines.splice(i+6, 0, ``);
 } else {
+    lines.splice(i, 0, `export const ${context.CAPS} = '${context.CAPS}';`);
     i = helpers.lastLineIndex(lines, /\}\);/);
+    lines.splice(i+2, 0, `export const ${context.CAMEL_ACTION_NAME} = payload => ({`);
+    lines.splice(i+3, 0, `  type: ${context.CAPS},`);
+    lines.splice(i+4, 0, `  payload`);
+    lines.splice(i+5, 0, `});`);
+    lines.splice(i+6, 0, ``);    
 }
 
-lines.splice(i+2, 0, `export const ${context.CAMEL_ACTION_NAME} = payload => ({`);
-lines.splice(i+3, 0, `  type: ${context.CAPS},`);
-lines.splice(i+4, 0, `  payload`);
-lines.splice(i+5, 0, `});`);
-lines.splice(i+6, 0, ``);
 
 toSave(targetPath, lines);
 

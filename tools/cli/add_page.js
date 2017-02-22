@@ -42,7 +42,7 @@ if (shell.test('-e', targetDir)) {
 
 // templated files
 [
-  'components/index.js',
+  'components/index.jsx',
   'redux/actions.js',
   'redux/reducer.js',
   'redux/middleware.js',

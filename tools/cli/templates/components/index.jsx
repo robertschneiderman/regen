@@ -4,10 +4,6 @@ import { connect } from 'react-redux';
 import * as actions from '../redux/actions';
 
 export class #{Template} extends Component {
-  static propTypes = {
-    actions: PropTypes.object.isRequired,
-  };
-
   render() {
     return (
       <div className="">
@@ -26,9 +22,13 @@ function mapStateToProps(state) {
 /* istanbul ignore next */
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators({ ...actions }, dispatch)
+    dispatches: bindActionCreators({ ...actions }, dispatch)
   };
 }
+
+#{Template}.propTypes = {
+  dispatches: PropTypes.object.isRequired,
+};
 
 export default connect(
   mapStateToProps,

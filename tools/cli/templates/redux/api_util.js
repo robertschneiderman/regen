@@ -1,4 +1,4 @@
-import { axioss, ROOT_URL } from '../../common/config';
+import { axioss, ROOT_URL } from '../../../common/config';
 
 export const fetchTemplates = (success) => {
   axioss.get(`#{template}s`)
