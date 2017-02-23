@@ -7,25 +7,16 @@ class Navbar extends Component {
   renderLinks() {
     if (this.props.authenticated) {
       return [
-        <li className="item-navbar">
-          <Link className="link-navbar" to="/dashboard">Dashboard</Link>
-        </li>,
-        <li className="item-navbar">        
-          <Link className="link-navbar" to="/calendar">Calendar</Link>
-        </li>,
-        <li className="item-navbar">              
-          <Link className="link-navbar" to="/new-task">New Task</Link>
-        </li>,
-        <li className="item-navbar">        
+        <li className="item-navbar" key={'nvb-n919'}>        
           <Link className="link-navbar" to="/signout">Sign Out</Link>
         </li>
       ];
     } else {
       return [
-        <li className="item-navbar" key={1}>
+        <li className="item-navbar" key={'nvb-98sd'}>
           <Link className="link-navbar" to="/signin">Sign In</Link>
         </li>,
-        <li className="item-navbar" key={2}>
+        <li className="item-navbar" key={'nvb-k2j3k'}>
           <Link className="link-navbar" to="/signup">Sign Up</Link>
         </li>
       ];
