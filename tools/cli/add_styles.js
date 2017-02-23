@@ -25,6 +25,7 @@ const CLASS_TYPES = {
     label: 'labels',
     link: 'links',
     list: 'lists',
+    modal: 'modals',
     nav: 'navs',
     panel: 'panels',
     shape: 'shapes',
@@ -70,7 +71,7 @@ if (inputPath) {
             if (targetPath) {
                 let lines = helpers.getLines(targetPath);
 
-                let regex = new RegExp("^." + className);
+                let regex = new RegExp("^." + className + " ");
                 let alreadyContainsClass = lines.some(line => regex.test(line));
                 // if (cssFileName === 'containers') console.log('className: ', className);
                 // console.log('regex: ', regex);
@@ -78,6 +79,8 @@ if (inputPath) {
                 // console.log('className: ', className);
                 // // if (className === 'btn-choose-color') console.log('alreadyContainsClass: ', alreadyContainsClass);
                 // // if (className === 'btn-choose-color') console.log('cssFileName: ', cssFileName);
+                if (className === 'input-goal') console.log('alreadyContainsClass: ', alreadyContainsClass);
+                if (className === 'input-goal') console.log('cssFileName: ', cssFileName);
                 if (!alreadyContainsClass) {
                     console.log('className: ', className);
                     let i;
