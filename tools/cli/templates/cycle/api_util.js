@@ -1,6 +1,6 @@
-import { axioss, ROOT_URL } from '../../../common/config';
+import { axioss, ROOT_URL } from '../../common/config';
 
-export const fetchTemplates = (success) => {
+export const fetch#{Template}s = (success) => {
   axioss.get(`#{template}s`)
   .then(success)
   .catch(function(error) {
@@ -8,7 +8,7 @@ export const fetchTemplates = (success) => {
   });
 };
 
-export const fetchTemplate = (id, success) => {
+export const fetch#{Template} = (id, success) => {
   axioss.get(`#{template}s/${id}`)
   .then(success)
   .catch(function(error) {
@@ -16,7 +16,7 @@ export const fetchTemplate = (id, success) => {
   });
 };
 
-export const createTemplate = (#{template}, success, error) => {
+export const create#{Template} = (#{template}, success, error) => {
   axioss.post(`#{template}s`)
   .then(success)
   .catch(function (error) {
@@ -24,7 +24,7 @@ export const createTemplate = (#{template}, success, error) => {
   });
 };
 
-export const updateTemplate = (#{template}, success) => {
+export const update#{Template} = (#{template}, success) => {
   axioss.patch(`#{template}s/${#{template}.id}`)
   .then(success)
   .catch(function (error) {
@@ -32,7 +32,7 @@ export const updateTemplate = (#{template}, success) => {
   });
 };
 
-export const destroyTemplate = (#{template}, success) => {
+export const destroy#{Template} = (#{template}, success) => {
   axioss.delete(`#{template}s/${#{template}.id}`)
   .then(success)
   .catch(function (error) {

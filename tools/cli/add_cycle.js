@@ -34,7 +34,7 @@ const myContext = {
 const filesToSave = [];
 const toSave = helpers.getToSave(filesToSave);
 
-const targetDir = path.join(helpers.getProjectRoot(), `src/pages/${context.CAMEL_PAGE_NAME}`);
+const targetDir = path.join(helpers.getProjectRoot(), `src/data/${context.CAMEL_PAGE_NAME}`);
 if (shell.test('-e', targetDir)) {
   console.log(`Error: page name existed: ${context.CAMEL_PAGE_NAME}`);
   process.exit(1);
@@ -42,17 +42,16 @@ if (shell.test('-e', targetDir)) {
 
 // templated files
 [
-  'page/components/index.jsx',
-  'page/redux/actions.js',
-  'page/redux/reducer.js',
-  'page/redux/middleware.js',
-  'page/redux/api_util.js',
-  'page/redux/initialState.js',
-  'page/redux/route.js',
-].forEach(fileName => {
-  console.log('processing file: ', fileName);
+  'cycle/actions.js',
+  'cycle/reducer.js',
+  'cycle/middleware.js',
+  'cycle/api_util.js',
+  'cycle/initialState.js',
+].forEach(templatePath => {
+  console.log('processing file: ', templatePath);
+  const res = helpers.handleTemplate(templatePath, myContext);
+  let fileName = templatePath.split("/")[1];
   const filePath = `${targetDir}/${fileName}`;
-  const res = helpers.handleTemplate(fileName, myContext);
   toSave(filePath, res);
 });
 
@@ -65,7 +64,7 @@ console.log('Add to root reducer.');
 targetPath = path.join(helpers.getProjectRoot(), 'src/common/rootReducer.js');
 lines = helpers.getLines(targetPath);
 i = helpers.lastLineIndex(lines, /^import /);
-lines.splice(i + 1, 0, `import ${context.CAMEL_PAGE_NAME}Reducer from '../pages/${context.CAMEL_PAGE_NAME}/redux/reducer';`);
+lines.splice(i + 1, 0, `import ${context.CAMEL_PAGE_NAME}Reducer from '../data/${context.CAMEL_PAGE_NAME}/reducer';`);
 i = helpers.lastLineIndex(lines, /^\}\);$/);
 lines.splice(i, 0, `  ${context.CAMEL_PAGE_NAME}: ${context.CAMEL_PAGE_NAME}Reducer,`);
 toSave(targetPath, lines);
@@ -75,26 +74,24 @@ console.log('Add to apply middleware.');
 targetPath = path.join(helpers.getProjectRoot(), 'src/common/store.js');
 lines = helpers.getLines(targetPath);
 i = helpers.lastLineIndex(lines, /^import /);
-lines.splice(i + 1, 0, `import ${context.CAMEL_PAGE_NAME}Middleware from '../pages/${context.CAMEL_PAGE_NAME}/redux/middleware';`);
+lines.splice(i + 1, 0, `import ${context.CAMEL_PAGE_NAME}Middleware from '../data/${context.CAMEL_PAGE_NAME}/middleware';`);
 i = helpers.lastLineIndex(lines, /^\)\(createStore\);$/);
 lines.splice(i, 0, `  ,${context.CAMEL_PAGE_NAME}Middleware`);
 toSave(targetPath, lines);
 
 /* ===== Add route to routeConfig.js ===== */
-console.log('Register route');
-targetPath = path.join(helpers.getProjectRoot(), 'src/common/routeConfig.js');
-lines = helpers.getLines(targetPath);
+// console.log('Register route');
+// targetPath = path.join(helpers.getProjectRoot(), 'src/common/routeConfig.js');
+// lines = helpers.getLines(targetPath);
 
-i = helpers.lastLineIndex(lines, /^import /);
-lines.splice(i + 1, 0, `import ${myContext.templateCamel} from '../pages/${context.CAMEL_PAGE_NAME}/components';`);
-i = helpers.lineIndex(lines, 'path: \'*\'');
-lines.splice(i, 0, `    { path: '${myContext.templateKebab}', name: '${myContext.Template}', component: ${myContext.templateCamel}},`);
+// i = helpers.lastLineIndex(lines, /^import /);
+// lines.splice(i + 1, 0, `import ${myContext.templateCamel} from '../pages/${context.CAMEL_PAGE_NAME}/components';`);
+// i = helpers.lineIndex(lines, 'path: \'*\'');
+// lines.splice(i, 0, `    { path: '${myContext.templateKebab}', name: '${myContext.Template}', component: ${myContext.templateCamel}},`);
 
-toSave(targetPath, lines);
+// toSave(targetPath, lines);
 
 shell.mkdir(targetDir);
-shell.mkdir(path.join(targetDir, 'redux'));
-shell.mkdir(path.join(targetDir, 'components'));
 
 helpers.saveFiles(filesToSave);
 console.log('Add page done: ', pageName);

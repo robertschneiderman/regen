@@ -14,6 +14,7 @@ export function signinUser({ email, name, password }) {
         
         const currentUser = localStorage.getItem('currentUser');        
         dispatch({ type: 'REQUEST_USER', payload: currentUser });        
+        dispatch({ type: 'CREATE_HISTORY', payload: currentUser });        
         hashHistory.push('dashboard');
       })
       .catch(() => {

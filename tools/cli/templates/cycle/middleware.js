@@ -17,7 +17,7 @@ import { request#{Template}s,
          REQUEST_#{TEMPLATE},
          CREATE_#{TEMPLATE},
          UPDATE_#{TEMPLATE},
-         DESTROY_#{TEMPLATE}
+         DESTROY_#{TEMPLATE},
        } from './actions';
 
 export default ({getState, dispatch}) => next => action => {
@@ -33,7 +33,7 @@ export default ({getState, dispatch}) => next => action => {
       fetch#{Template}(action.id, #{template}Success);
       return next(action);
     case CREATE_#{TEMPLATE}:
-      create#{Template}(action.#{template}, #{template}Success, #{template}Errored);
+      create#{Template}(action.id, #{template}Success, #{template}Errored);
       return next(action);
     case UPDATE_#{TEMPLATE}:
       update#{Template}(action.#{template}, #{template}Success);
